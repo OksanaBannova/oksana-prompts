@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0b0812">
+    <meta name="description" content="Личная библиотека НейроФото и промтов Оксаны Банновой">
+
+    <title>Оксана — промты</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         ШАПКА
+    ========================== -->
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <a href="#" class="logo" id="logoButton">
+                <span class="logo-icon">✦</span>
+
+                <span>
+                    <strong>Оксана</strong>
+                    <small>промты</small>
+                </span>
+            </a>
+
+           
+<div class="header-actions">
+
+    <button
+        class="icon-button"
+        id="favoritesButton"
+        type="button"
+        title="Избранное"
+    >
+        <span>☆</span>
+        <b id="favoritesCount">0</b>
+    </button>
+
+    <button
+        class="icon-button"
+        id="desktopSettingsButton"
+        type="button"
+        title="Настройки"
+    >
+        <span>⚙</span>
+    </button>
+
+    <button
+        class="add-button"
+        id="openAddButton"
+        type="button"
+    >
+        <span>＋</span>
+        <span>Добавить</span>
+    </button>
+
+</div>
+
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         ОСНОВНОЙ КОНТЕНТ
+    ========================== -->
+
+    <main class="main">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-label">
+                    <span></span>
+                    МОЯ БИБЛИОТЕКА НЕЙРОФОТО
+                </div>
+
+                <h1>
+                    Оксана
+                    <span>— промты</span>
+                </h1>
+
+                <p>
+                    Личная коллекция фотографий, идей
+                    и промтов для создания НейроФото.
+                </p>
+
+            </div>
+
+            <div class="hero-decoration">
+                <span>✦</span>
+                <span>✧</span>
+                <span>✦</span>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ПОИСК
+        ========================== -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Найти фото, категорию или промт..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    class="clear-search"
+                    id="clearSearch"
+                    aria-label="Очистить поиск"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             КАТЕГОРИИ
+        ========================== -->
+
+        <section class="categories-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-kicker">ФИЛЬТР</span>
+                    <h2>Категории</h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="text-button"
+                    id="showAllButton"
+                >
+                    Все работы
+                </button>
+
+            </div>
+
+            <div
+                class="categories"
+                id="categories"
+            >
+                <!-- Категории создаются через JavaScript -->
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ГАЛЕРЕЯ
+        ========================== -->
+
+        <section class="gallery-section">
+
+            <div class="section-heading gallery-heading">
+
+                <div>
+
+                    <span class="section-kicker">КОЛЛЕКЦИЯ</span>
+
+                    <h2>
+                        Мои работы
+                        <span
+                            class="works-count"
+                            id="worksCount"
+                        >
+                            0
+                        </span>
+                    </h2>
+
+                </div>
+
+                <div class="view-buttons">
+
+                    <button
+                        type="button"
+                        class="view-button active"
+                        id="gridViewButton"
+                        title="Сетка"
+                    >
+                        ▦
+                    </button>
+
+                    <button
+                        type="button"
+                        class="view-button"
+                        id="compactViewButton"
+                        title="Компактная сетка"
+                    >
+                        ▤
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Сюда JavaScript добавляет карточки -->
+
+            <div
+                class="gallery"
+                id="gallery"
+            >
+            </div>
+
+
+            <!-- Состояние, когда ничего не найдено -->
+
+            <div
+                class="empty-state hidden"
+                id="emptyState"
+            >
+
+                <div class="empty-icon">✦</div>
+
+                <h3>Ничего не найдено</h3>
+
+                <p>
+                    Попробуй изменить запрос или выбрать другую категорию.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="resetFiltersButton"
+                >
+                    Сбросить фильтры
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         МОДАЛЬНОЕ ОКНО ПРОСМОТРА
+    ========================== -->
+
+    <div
+        class="modal-overlay hidden"
+        id="viewModal"
+    >
+
+        <div
+            class="modal view-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="viewModalTitle"
+        >
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeViewModal"
+                aria-label="Закрыть"
+            >
+                ×
+            </button>
+
+
+            <div class="view-modal-content">
+
+                <div class="view-image-wrapper">
+
+                    <img
+                        id="viewImage"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+
+                <div class="view-info">
+
+                    <div class="modal-kicker">
+                        НЕЙРОФОТО
+                    </div>
+
+                    <h2 id="viewModalTitle">
+                        Название работы
+                    </h2>
+
+
+                    <div
+                        class="view-categories"
+                        id="viewCategories"
+                    >
+                    </div>
+
+
+                    <div class="prompt-block">
+
+                        <div class="prompt-heading">
+
+                            <h3>Промт</h3>
+
+                            <button
+                                type="button"
+                                class="copy-button"
+                                id="copyPromptButton"
+                            >
+                                <span>▣</span>
+                                Копировать
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="prompt-text"
+                            id="viewPrompt"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <div class="view-actions">
+
+                        <button
+                            type="button"
+                            class="favorite-large-button"
+                            id="viewFavoriteButton"
+                        >
+                            ☆ Добавить в избранное
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="editFromViewButton"
+                        >
+                            ✎ Редактировать
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         МОДАЛЬНОЕ ОКНО ДОБАВЛЕНИЯ
+    ========================== -->
+
+    <div
+        class="modal-overlay hidden"
+        id="formModal"
+    >
+
+        <div
+            class="modal form-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="formModalTitle"
+        >
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeFormModal"
+                aria-label="Закрыть"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-header">
+
+                <div class="modal-kicker">
+                    НОВАЯ РАБОТА
+                </div>
+
+                <h2 id="formModalTitle">
+                    Добавить НейроФото
+                </h2>
+
+                <p>
+                    Добавь фотографию, промт и категории.
+                </p>
+
+            </div>
+
+
+            <form id="workForm">
+
+                <!-- ID существующей работы -->
+
+                <input
+                    type="hidden"
+                    id="editWorkId"
+                >
+
+
+                <!-- ФОТО -->
+
+                <div class="form-group">
+
+                    <label for="imageInput">
+                        Фотография
+                    </label>
+
+                    <div
+                        class="upload-area"
+                        id="uploadArea"
+                    >
+
+                        <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                        >
+
+                        <div
+                            class="upload-placeholder"
+                            id="uploadPlaceholder"
+                        >
+
+                            <div class="upload-icon">
+                                ＋
+                            </div>
+
+                            <strong>
+                                Выбрать фотографию
+                            </strong>
+
+                            <span>
+                                JPG, PNG или WEBP
+                            </span>
+
+                        </div>
+
+                        <img
+                            id="imagePreview"
+                            class="image-preview hidden"
+                            src=""
+                            alt="Предпросмотр"
+                        >
+
+                    </div>
+
+                    <div
+                        class="file-name"
+                        id="fileName"
+                    ></div>
+
+                </div>
+
+
+                <!-- НАЗВАНИЕ -->
+
+                <div class="form-group">
+
+                    <label for="titleInput">
+                        Название
+                    </label>
+
+                    <input
+                        type="text"
+                        id="titleInput"
+                        placeholder="Например: Осенняя фотосессия"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ПРОМТ -->
+
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label for="promptInput">
+                            Промт
+                        </label>
+
+                        <span
+                            class="characters-count"
+                            id="charactersCount"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+                    <textarea
+                        id="promptInput"
+                        rows="8"
+                        placeholder="Вставь сюда полный промт..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- КАТЕГОРИИ -->
+
+                <div class="form-group">
+
+                    <label>
+                        Категории
+                    </label>
+
+                    <div
+                        class="selected-tags"
+                        id="selectedTags"
+                    >
+                    </div>
+
+
+                    <div
+                        class="category-input-wrapper"
+                    >
+
+                        <input
+                            type="text"
+                            id="categoryInput"
+                            placeholder="Добавить категорию..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            id="addCategoryButton"
+                            title="Добавить категорию"
+                        >
+                            ＋
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="category-suggestions"
+                        id="categorySuggestions"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- КНОПКИ -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelFormButton"
+                    >
+                        Отмена
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        <span id="saveButtonText">
+                            Сохранить работу
+                        </span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         МОДАЛЬНОЕ ОКНО НАСТРОЕК
+    ========================== -->
+
+    <div
+        class="modal-overlay hidden"
+        id="settingsModal"
+    >
+
+        <div
+            class="modal settings-modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeSettingsModal"
+            >
+                ×
+            </button>
+
+            <div class="modal-header">
+
+                <div class="modal-kicker">
+                    БИБЛИОТЕКА
+                </div>
+
+                <h2>
+                    Настройки
+                </h2>
+
+                <p>
+                    Управление твоей коллекцией.
+                </p>
+
+            </div>
+
+
+            <div class="settings-list">
+
+                <button
+                    type="button"
+                    class="settings-item"
+                    id="exportButton"
+                >
+
+                    <span class="settings-icon">
+                        ↓
+                    </span>
+
+                    <span>
+                        <strong>Создать резервную копию</strong>
+                        <small>Сохранить данные библиотеки</small>
+                    </span>
+
+                </button>
+
+
+                <label
+                    class="settings-item"
+                    for="importInput"
+                >
+
+                    <span class="settings-icon">
+                        ↑
+                    </span>
+
+                    <span>
+                        <strong>Восстановить библиотеку</strong>
+                        <small>Загрузить резервную копию</small>
+                    </span>
+
+                    <input
+                        type="file"
+                        id="importInput"
+                        accept=".json"
+                        hidden
+                    >
+
+                </label>
+
+
+                <button
+                    type="button"
+                    class="settings-item danger"
+                    id="clearDatabaseButton"
+                >
+
+                    <span class="settings-icon">
+                        ×
+                    </span>
+
+                    <span>
+                        <strong>Удалить всю библиотеку</strong>
+                        <small>Все фотографии и промты будут удалены</small>
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         УВЕДОМЛЕНИЕ
+    ========================== -->
+
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
+    >
+        <span id="toastIcon">✓</span>
+        <span id="toastMessage">Готово</span>
+    </div>
+
+
+    <!-- =========================
+         НИЖНЯЯ ПАНЕЛЬ МОБИЛЬНОЙ ВЕРСИИ
+    ========================== -->
+
+    <nav class="mobile-nav">
+
+        <button
+            type="button"
+            class="mobile-nav-button active"
+            id="mobileHomeButton"
+        >
+            <span>⌂</span>
+            <small>Все</small>
+        </button>
+
+        <button
+            type="button"
+            class="mobile-nav-button"
+            id="mobileFavoritesButton"
+        >
+            <span>☆</span>
+            <small>Избранное</small>
+        </button>
+
+        <button
+            type="button"
+            class="mobile-nav-add"
+            id="mobileAddButton"
+        >
+            <span>＋</span>
+        </button>
+
+        <button
+            type="button"
+            class="mobile-nav-button"
+            id="mobileSettingsButton"
+        >
+            <span>⚙</span>
+            <small>Настройки</small>
+        </button>
+
+    </nav>
+
+
+    <!-- JavaScript -->
+
+    <script src="app.js"></script>
+
+</body>
+</html>
